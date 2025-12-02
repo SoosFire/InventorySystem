@@ -10,28 +10,32 @@ public class Main {
 
     static Scanner input = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         Items items = new Items();
 
-        ArrayList<ItemSO> inventory = new ArrayList<>();
-        inventory.add(items.sword);
-        inventory.add(items.dualSword);
-        inventory.add(items.steelTippedArrow);
-        inventory.add(items.boltArrow);
-        inventory.add(items.steelChestplate);
-        inventory.add(items.leatherChestplate);
-        inventory.add(items.healthPotion);
-        inventory.add(items.chainmailShoulderPiece);
+        InventorySystem InventorySystem = new InventorySystem();
 
-        System.out.println("Search for items");
-        System.out.println("Select category");
-        System.out.println();
-        System.out.println("1) Weapons");
-        System.out.println("2) Utility");
-        System.out.println("3) Armor");
-        int choice = input.nextInt();
+        InventorySystem.onStart();
+        InventorySystem.addItem(items.bow);
+        InventorySystem.addItem(items.chainmailBoots);
 
+        System.out.println(InventorySystem.getItems().size());
+        for (ItemSO item : InventorySystem.getItems()) {
+            System.out.println(item.getName());
+        }
+
+        System.out.println("Item Class:");
+        // ItemType Search System
+        InventorySystem.items = InventorySystem.getItemsByClass(InventorySystem.items, ItemClass.Weapon);
+        for (ItemSO item : InventorySystem.items) {
+            System.out.println(item.getName());
+        }
+
+    }
+}
+
+/*
         // Search System
         switch (choice) {
             case 1:
@@ -88,5 +92,6 @@ public class Main {
         }
 
         return result;
-    }
-}
+        }
+   */
+
