@@ -1,6 +1,6 @@
 package Enums;
 
-public enum ItemEnum {
+public enum ItemName {
 
     // Weapons
     Sword,

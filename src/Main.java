@@ -1,7 +1,5 @@
-import Enums.ItemClass;
 import Enums.ItemType;
-import Item.ItemSO;
-import Item.Items;
+import Item.Item;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,26 +10,30 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Items items = new Items();
+        Inventory inventory = new Inventory();
+        Shop shop = new Shop();
 
-        InventorySystem InventorySystem = new InventorySystem();
+        shop.buyIronSword(inventory);
+        shop.buyIronAxe(inventory);
 
-        InventorySystem.onStart();
-        InventorySystem.addItem(items.bow);
-        InventorySystem.addItem(items.chainmailBoots);
+        inventory.showInventory();
 
-        System.out.println(InventorySystem.getItems().size());
-        for (ItemSO item : InventorySystem.getItems()) {
-            System.out.println(item.getName());
+    }
+
+
+
+    // METHODS
+
+    public static ArrayList<Item> getItemsByType (ArrayList < Item > inventory, ItemType type){
+        ArrayList<Item> result = new ArrayList<>();
+
+        for (Item item : inventory) {
+            if (item.getType() == type) {  // or equals() for non-enum types
+                result.add(item);
+            }
         }
 
-        System.out.println("Item Class:");
-        // ItemType Search System
-        InventorySystem.items = InventorySystem.getItemsByClass(InventorySystem.items, ItemClass.Weapon);
-        for (ItemSO item : InventorySystem.items) {
-            System.out.println(item.getName());
-        }
-
+        return result;
     }
 }
 
